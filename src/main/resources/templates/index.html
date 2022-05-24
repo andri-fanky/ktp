@@ -1,0 +1,40 @@
+<html>
+    <div th:replace="header :: header"></div>
+    <body>
+        <section class="container mt-5">
+            <div>
+                <a type="button" href="/create" class="btn btn-primary btn-sm">Tambah Data</a>
+            </div>
+            <table id="table" class="table table-hover table-bordered mt-3">
+                <thead>
+                    <tr class="text-center">
+                        <th>No KTP</th>
+                        <th>Nama</th>
+                        <th>Tanggal Lahir</th>
+                        <th>Jenis Kelamin</th>
+                        <th>Alamat</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item:${data}">
+                        <td th:text="${item.noKtp}"></td>
+                        <td th:text="${item.nama}"></td>
+                        <td th:text="${#calendars.format(item.tglLahir, 'dd MMM yyyy')}" class="text-center"></td>
+                        <div th:switch="${item.jenisKelamin}">
+                            <td th:case="true">Laki-Laki</td>
+                            <td th:case="false">Perempuan</td>
+                            <td th:case="*"></td>
+                        </div>
+                        <td th:text="${item.alamat}"></td>
+                        <td class="col-md-2 text-center">
+                            <a type="button" th:href="@{/edit/{id}(id=${item.id})}" class="btn btn-primary btn-sm">Edit</a>
+                            <a type="button" th:href="@{/destroy/{id}(id=${item.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin?')">Hapus</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </body>
+    <div th:replace="footer :: footer"></div>
+</html>
