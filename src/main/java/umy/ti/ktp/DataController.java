@@ -12,6 +12,7 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,8 +21,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import umy.ti.ktp.exceptions.NonexistentEntityException;
 
@@ -145,9 +146,26 @@ public class DataController {
         return new RedirectView("/");
     }
     
+    @GetMapping("/detail/{id}")
+    public String detail(@PathVariable Long id, Model model) {
+        Data data = dataJpa.findData(id);
+        
+        if (data.getFoto() != null) {
+            byte[] photo = data.getFoto();
+            String base64Image = Base64.getEncoder().encodeToString(photo);
+            String imgLink = "data:image/jpg;base64,".concat(base64Image);
+            model.addAttribute("photo", imgLink);
+        } else {
+            model.addAttribute("photo", "");
+        }
+        
+        model.addAttribute("data", data);
+        return "detail";
+    }
+    
     @GetMapping("/destroy/{id}")
-    public RedirectView destroy(@PathVariable String id) throws NonexistentEntityException {
-        dataJpa.destroy(Long.parseLong(id));
+    public RedirectView destroy(@PathVariable Long id) throws NonexistentEntityException {
+        dataJpa.destroy(id);
         return new RedirectView("/");
     }
 }

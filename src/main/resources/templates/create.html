@@ -1,100 +1,115 @@
 <html>
     <div th:replace="header :: header"></div>
     <body>
-        <section class="container mt-5">
-            <form action="/store" method="POST" enctype="multipart/form-data">
-                <table class="table table-borderless mt-3">
-                    <tbody>
-                        <tr>
-                            <td class="col-md-2">No KTP</td>
-                            <td>
-                                <input type="number" name="no_ktp" min="1" class="form-control" placeholder="No KTP">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Nama</td>
-                            <td>
-                                <input type="text" name="nama" class="form-control" placeholder="Nama">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Tanggal Lahir</td>
-                            <td>
-                                <input type="date" name="tgl_lahir" class="form-control">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Jenis Kelamin</td>
-                            <td>
-                                <input type="radio" name="jenis_kelamin" value="1" />
-                                <span>Laki-Laki</span>
-                                <input type="radio" name="jenis_kelamin" value="0" />
-                                <span>Perempuan</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Alamat</td>
-                            <td>
-                                <textarea type="text" name="alamat" class="form-control" placeholder="Alamat"></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Agama</td>
-                            <td>
-                                <input type="radio" name="agama" value="Islam" />
-                                <span>Islam</span>
-                                <input type="radio" name="agama" value="Protestan" />
-                                <span>Protestan</span>
-                                <input type="radio" name="agama" value="Katolik" />
-                                <span>Katolik</span>
-                                <input type="radio" name="agama" value="Hindu" />
-                                <span>Hindu</span>
-                                <input type="radio" name="agama" value="Buddha" />
-                                <span>Buddha</span>
-                                <input type="radio" name="agama" value="Khonghucu" />
-                                <span>Khonghucu</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Status Perkawinan</td>
-                            <td>
-                                <input type="radio" name="status_perkawinan" value="1" />
-                                <span>KAWIN</span>
-                                <input type="radio" name="status_perkawinan" value="0" />
-                                <span>BELUM KAWIN</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Pekerjaan</td>
-                            <td>
-                                <input type="text" name="pekerjaan" class="form-control" placeholder="Pekerjaan">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Kewarganegaraan</td>
-                            <td>
-                                <input type="radio" name="kewarganegaraan" value="WNI" />
-                                <span>WNI</span>
-                                <input type="radio" name="kewarganegaraan" value="WNA" />
-                                <span>WNA</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Foto</td>
-                            <td>
-                                <input type="file" name="foto" class="form-control">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <a type="button" href="/" class="btn btn-danger">Batal</a>
-                                <button type="submit" class="btn btn-primary">Simpan</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </form>
+        <section class="container mt-5 mb-5">
+            <div class="card">
+                <div class="card-header">
+                    <a href="/" data-bs-toggle="tooltip" data-bs-placement="top" title="Kembali"><i class="fa-solid fa-arrow-left"></i></a>
+                    &nbsp;&nbsp;&nbsp;Tambah Data
+                </div>
+                <div class="card-body">
+                    <form action="/store" method="POST" enctype="multipart/form-data">
+                        <table class="table table-borderless mt-2">
+                            <tbody>
+                                <tr>
+                                    <td class="col-md-2">No KTP</td>
+                                    <td>
+                                        <input type="number" name="no_ktp" min="1" class="form-control" placeholder="No KTP">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Nama</td>
+                                    <td>
+                                        <input type="text" name="nama" class="form-control" placeholder="Nama">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Tanggal Lahir</td>
+                                    <td>
+                                        <input type="date" name="tgl_lahir" class="form-control">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Jenis Kelamin</td>
+                                    <td>
+                                        <input type="radio" name="jenis_kelamin" value="1" />
+                                        <span>Laki-Laki</span>
+                                        <input type="radio" name="jenis_kelamin" value="0" />
+                                        <span>Perempuan</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Alamat</td>
+                                    <td>
+                                        <textarea type="text" name="alamat" class="form-control" placeholder="Alamat"></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Agama</td>
+                                    <td>
+                                        <input type="radio" name="agama" value="Islam" />
+                                        <span>Islam</span>
+                                        <input type="radio" name="agama" value="Protestan" />
+                                        <span>Protestan</span>
+                                        <input type="radio" name="agama" value="Katolik" />
+                                        <span>Katolik</span>
+                                        <input type="radio" name="agama" value="Hindu" />
+                                        <span>Hindu</span>
+                                        <input type="radio" name="agama" value="Buddha" />
+                                        <span>Buddha</span>
+                                        <input type="radio" name="agama" value="Khonghucu" />
+                                        <span>Khonghucu</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Status Perkawinan</td>
+                                    <td>
+                                        <input type="radio" name="status_perkawinan" value="1" />
+                                        <span>KAWIN</span>
+                                        <input type="radio" name="status_perkawinan" value="0" />
+                                        <span>BELUM KAWIN</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Pekerjaan</td>
+                                    <td>
+                                        <input type="text" name="pekerjaan" class="form-control" placeholder="Pekerjaan">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Kewarganegaraan</td>
+                                    <td>
+                                        <input type="radio" name="kewarganegaraan" value="WNI" />
+                                        <span>WNI</span>
+                                        <input type="radio" name="kewarganegaraan" value="WNA" />
+                                        <span>WNA</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Foto</td>
+                                    <td>
+                                        <input type="file" name="foto" class="form-control">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-sm" onclick="this.form.reset();"><i class="fa-solid fa-xmark"></i> Reset</button>
+                                        <button type="submit" class="btn btn-primary btn-sm"><i class="fa-solid fa-floppy-disk"></i> Simpan</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
         </section>
     </body>
+    <div th:replace="footer :: footer"></div>
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
 </html>

@@ -1,40 +1,79 @@
 <html>
     <div th:replace="header :: header"></div>
     <body>
-        <section class="container mt-5">
-            <div>
-                <a type="button" href="/create" class="btn btn-primary btn-sm">Tambah Data</a>
+        <section class="container mt-5 mb-5">
+            <div class="card">
+                <div class="card-header">
+                  KTP
+                </div>
+                <div class="card-body">
+                    <a type="button" href="/create" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Tambah Data</a>
+                    <table id="table" class="table table-hover table-bordered mt-3">
+                        <thead class="table-light">
+                            <tr class="text-center">
+                                <th>No KTP</th>
+                                <th>Nama</th>
+                                <th>Tanggal Lahir</th>
+                                <th style="width:150px">Jenis Kelamin</th>
+                                <th>Alamat</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="item:${data}">
+                                <td th:text="${item.noKtp}"></td>
+                                <td th:text="${item.nama}"></td>
+                                <td th:text="${#calendars.format(item.tglLahir, 'dd MMM yyyy')}" class="text-center"></td>
+                                <div th:switch="${item.jenisKelamin}">
+                                    <td th:case="true">Laki-Laki</td>
+                                    <td th:case="false">Perempuan</td>
+                                    <td th:case="*"></td>
+                                </div>
+                                <td th:text="${item.alamat}"></td>
+                                <td class="col-md-2 text-center">
+                                    <a type="button" th:href="@{/detail/{id}(id=${item.id})}" class="btn btn-warning btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail"><i class="fa-solid fa-list"></i></a>
+                                    <a type="button" th:href="@{/edit/{id}(id=${item.id})}" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a type="button" href="#" class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus" th:onclick="'javascript:confirmDestroy(' + ${item.id} + ')'"><i class="fa-solid fa-trash-can"></i></a>
+<!--                                    <a type="button" th:href="@{/destroy/{id}(id=${item.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin?')"><i class="fa-solid fa-xmark"></i> Hapus</a>-->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <table id="table" class="table table-hover table-bordered mt-3">
-                <thead>
-                    <tr class="text-center">
-                        <th>No KTP</th>
-                        <th>Nama</th>
-                        <th>Tanggal Lahir</th>
-                        <th>Jenis Kelamin</th>
-                        <th>Alamat</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="item:${data}">
-                        <td th:text="${item.noKtp}"></td>
-                        <td th:text="${item.nama}"></td>
-                        <td th:text="${#calendars.format(item.tglLahir, 'dd MMM yyyy')}" class="text-center"></td>
-                        <div th:switch="${item.jenisKelamin}">
-                            <td th:case="true">Laki-Laki</td>
-                            <td th:case="false">Perempuan</td>
-                            <td th:case="*"></td>
-                        </div>
-                        <td th:text="${item.alamat}"></td>
-                        <td class="col-md-2 text-center">
-                            <a type="button" th:href="@{/edit/{id}(id=${item.id})}" class="btn btn-primary btn-sm">Edit</a>
-                            <a type="button" th:href="@{/destroy/{id}(id=${item.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin?')">Hapus</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
         </section>
     </body>
     <div th:replace="footer :: footer"></div>
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+        function confirmDestroy(id) {
+            console.log(id);
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Data yang sudah dihapus tidak dapat dikembalikan",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    location.href = '/destroy/'+id;
+//                    Swal.fire({
+//                        title: 'Sukses',
+//                        text: 'Data berhasil dihapus.',
+//                        icon: 'success',
+//                        allowOutsideClick: false,
+//                        allowEscapeKey: false,
+//                    }).then(() => {
+//                        location.href = '/destroy/'+id;
+//                    });
+                }
+            })
+        }
+    </script>
 </html>
